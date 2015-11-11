@@ -9,8 +9,8 @@ class Complement
   end
 
   def self.convert_word(word, type)
-    word.chars.map do |letter|
-      convert_letter(letter, type)
+    word.chars.map do |char|
+      convert_char(char, type)
     end.join
   end
 
@@ -19,7 +19,7 @@ class Complement
       rna: { 'G' => 'C', 'C' => 'G', 'A' => 'T', 'U' => 'A' } }
   end
 
-  def self.convert_letter(letter, type)
-    transformations[type][letter] || (fail ArgumentError)
+  def self.convert_char(char, type)
+    transformations[type][char] || (fail ArgumentError)
   end
 end
