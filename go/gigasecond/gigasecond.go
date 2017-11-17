@@ -1,14 +1,10 @@
 // Package gigasecond implements a function to add a gigasecond to a date
 package gigasecond
 
-import (
-	"math"
-	"time"
-)
+import "time"
 
 // AddGigasecond adds a gigasecond.
 func AddGigasecond(t time.Time) time.Time {
-	giga := math.Pow10(9)
-	gigasecond := time.Duration(giga) * time.Second
+	gigasecond := time.Duration(1e9) * time.Second
 	return t.Add(gigasecond)
 }
