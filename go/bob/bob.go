@@ -1,8 +1,8 @@
 package bob
 
 import (
-	"strings"
 	"regexp"
+	"strings"
 )
 
 var hasLetters = regexp.MustCompile("[a-zA-Z]+")
