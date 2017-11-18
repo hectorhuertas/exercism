@@ -1,34 +1,28 @@
 package bob
 
-import "strings"
-import "regexp"
-import "unicode"
+import (
+	"strings"
+	"regexp"
+)
 
-func removeWhitespace(s string) string {
-	return strings.Map(func(r rune) rune {
-		if unicode.IsSpace(r) {
-			return -1
-		}
-		return r
-	}, s)
-}
+var hasLetters = regexp.MustCompile("[a-zA-Z]+")
 
 func Hey(remark string) string {
-	remark = removeWhitespace(remark)
+	remark = strings.TrimSpace(remark)
+
 	if remark == "" {
 		return "Fine. Be that way!"
 	}
 
-	reg, _ := regexp.Compile("[^a-zA-Z]+")
-	r := reg.ReplaceAllString(remark, "")
-	isShouting := r == strings.ToUpper(r) && r != ""
+	isShouting := remark == strings.ToUpper(remark) && hasLetters.MatchString(remark)
 	if isShouting {
 		return "Whoa, chill out!"
 	}
 
-	isQuestion := remark[len(remark)-1:] == "?"
+	isQuestion := strings.HasSuffix(remark, "?")
 	if isQuestion {
 		return "Sure."
 	}
+
 	return "Whatever."
 }
